@@ -34,46 +34,35 @@ input
 
 
 #include<iostream>
+
+#define mindistance 3
+
 using namespace std;
 void calc(int n)
 {
         int a[n];
-        int b[n];
-        for(int i=1;i<=n;i++)
-        b[i]=0;
-        int k=1;
-        int ctr=0;
-        for(int i=1;i<=n;i++)
-        cin>>a[i];
-        for(int i=1;i<=n;i++)
+
+        int k=mindistance;
+
+        for(int i=0;i<n;i++) {
+        	cin>>a[i];
+        }
+        for(int i=0;i<n;i++)
         {
             if(a[i]==1)
             {
-                b[k]=i;
+                if (k<mindistance) {
+                	 cout<<"NO\n";
+                	 return;
+                }
+                k=0;
+            }
+            else {
                 k++;
             }
-            
         }
-        if(b[2]==0)
-            {
-                cout<<"YES\n";
-                return;
-            }
-        for(int i=1;i<=n;i++)
-        {
-            
-            if((b[i]!=0)&&(b[i+1]!=0))
-            {
-                if(b[i+1] - b[i] < 6)
-                    {
-                        ctr++;
-                    }
-            }
-        }
-        if(ctr >= 1)
-        cout<<"NO\n";
-        else
         cout<<"YES\n";
+        return;
 }
 int main()
 {
