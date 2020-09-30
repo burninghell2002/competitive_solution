@@ -1,5 +1,7 @@
 /* problem : https://www.codechef.com/JUNE20B/problems/XYSTR*/
 
+/*Jai Shree Ram🚩🚩*/
+
 
 
 #include <bits/stdc++.h>
