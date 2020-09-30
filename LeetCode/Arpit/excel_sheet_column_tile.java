@@ -9,8 +9,8 @@ For example:
     ...
     26 -> Z
     27 -> AA
-    28 -> AB 
-    ... 
+    28 -> AB
+    ...
 */
 class Solution {
     public String convertToTitle(int n) {
