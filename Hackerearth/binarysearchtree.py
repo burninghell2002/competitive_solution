@@ -1,4 +1,4 @@
-# link to question: 
+# link to question: https://www.hackerearth.com/practice/data-structures/trees/binary-search-tree/practice-problems/algorithm/b-sequence-f919fc86/description/
 
 # Binary Search Tree in strictly increasing followed by strictly decreasing order is referred to as B Sequence
 
