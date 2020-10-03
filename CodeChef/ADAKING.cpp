@@ -1,4 +1,6 @@
 /* problem : https://www.codechef.com/JULY20B/problems/ADAKING*/
+/*Jai Shree Ram*/
+
 
 #include <bits/stdc++.h>
 #include<numeric>
