@@ -10,12 +10,12 @@ int main ()
    }
 cout<<endl;
 for(i = 0; i<10; i++) {
-   for(j = i+1; j<10; j++)
+   for(j = 0; j<10-1-i; j++)
    {
-      if(a[j] < a[i]) {
-         temp = a[i];
-         a[i] = a[j];
-         a[j] = temp;
+      if(a[j] > a[j+1]) {
+         temp = a[j];
+         a[j] = a[j+1];
+         a[j+1] = temp;
       }
    }
 pass++;
