@@ -1,6 +1,7 @@
 //Initial Template for C++
 
 #include <bits/stdc++.h>
+#include <iostream>
 using namespace std;
 
 /* A binary tree node has data, pointer to left child
