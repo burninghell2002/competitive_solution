@@ -1,0 +1,92 @@
+//Initial template for C++
+
+#include <bits/stdc++.h>
+using namespace std;
+
+ // } Driver Code Ends
+//User function template for C++
+
+class Solution{   
+public:
+    string solve(int arr[], int n) {
+        sort(arr,arr+n);
+        stack<int> s1,s2;
+        
+        int flag = 0,carry = 0;
+        string ans = "";
+        for(int i = n-1;i>=0;i--){
+           if(flag == 0){
+               s1.push(arr[i]);
+               flag = 1;
+           }
+           else{
+               s2.push(arr[i]);
+               flag = 0;
+           }
+           
+           if(s1.size() == 1 && s2.size() == 1){
+                int a  = s1.top();
+                s1.pop();
+                int b = s2.top();
+                s2.pop();
+                
+                int sum = a+b+carry;
+                
+                if(sum >=10){
+                    carry = sum/10;
+                    sum = sum%10;
+                    ans = to_string(sum) + ans;
+                }
+                else{
+                    carry = 0;
+                    ans = to_string(sum)+ans;
+                }
+           }
+           
+        }
+        
+        if(s1.size() == 1){
+            int a = s1.top();
+            int sum = a+carry;
+            if(sum != 0){
+                ans = to_string(sum)+ans;
+            }
+            
+        }
+        else{
+            if(carry != 0){
+                ans = to_string(carry)+ans;
+            }
+        }
+        
+        int i = 0;
+        while(ans[i] == '0' ){
+            i++;
+        }
+        
+        if(ans[0] == '0'){
+            ans.erase(0,i);
+        }
+        
+    return ans;
+        
+    }
+};
+
+// { Driver Code Starts.
+int main() {
+    int t;
+    cin >> t;
+    while (t--) {
+        int n;
+        cin >> n;
+        int arr[n];
+        for (int i = 0; i < n; i++) {
+            cin >> arr[i];
+        }
+        Solution ob;
+        auto ans = ob.solve(arr, n);
+        cout << ans << "\n";
+    }
+    return 0;
+}  // } Driver Code Ends
