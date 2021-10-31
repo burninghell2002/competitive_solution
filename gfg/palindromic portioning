@@ -1,0 +1,80 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+ // } Driver Code Ends
+// User function Template for C++
+
+class Solution{
+public:
+    int dp[501][501];
+    
+    bool isPalindrome(string S){
+        string temp = S;
+        reverse(S.begin(),S.end());
+        
+        return S == temp;
+    }
+    int solve(string S,int i,int j){
+        if(i>=j){
+            return 0;
+        }
+        string temp = S.substr(i,j-i+1);
+        
+        if(isPalindrome(temp)){
+            return 0;
+        }
+        
+        if(dp[i][j] != -1){
+            return dp[i][j];
+        }
+        
+        int ans = INT_MAX;
+        
+        for(int k = i;k<j;k++){
+            int left ,right;
+            if(dp[i][k] != -1){
+                left = dp[i][k];
+            }
+            else{
+                left = solve(S,i,k);
+            }
+            
+            if(dp[k+1][j] != -1){
+                right = dp[k+1][j];
+            }
+            else{
+                right = solve(S,k+1,j);
+            }
+            int temp = 1+left +right;
+            
+            if(temp<ans){
+                ans = temp;
+            }
+        }
+        
+        return dp[i][j] = ans;
+    }
+
+    int palindromicPartition(string str)
+    {
+       int i = 0;
+       int j = str.length()-1;
+       memset(dp,-1,sizeof(dp));
+       return solve(str,i,j);        
+    }
+};
+
+// { Driver Code Starts.
+
+int main(){
+    int t;
+    cin>>t;
+    while(t--){
+        string str;
+        cin>>str;
+        
+        Solution ob;
+        cout<<ob.palindromicPartition(str)<<"\n";
+    }
+    return 0;
+}  // } Driver Code Ends
