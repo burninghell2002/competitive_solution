@@ -1,0 +1,77 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+
+ // } Driver Code Ends
+//User function template for C++
+
+// A : given string to search
+// B : vector of available strings
+
+class Solution
+{
+public:
+
+    bool solve(string &s , unordered_map<string,int>&mp,int maxLen){
+        
+        if(s.length() == 0){
+            return true;
+        }
+        
+        string ans = "";
+        int index = -1;
+        for(int i = 0;i<s.length();i++){
+            ans += s[i];
+            if(mp.find(ans) != mp.end()){
+                index = i;
+                string s1 = s.substr(index+1,s.length()-index+1);    
+                if(solve(s1,mp,maxLen)){
+                  return true;   
+                }
+            } 
+            if(ans.length() > maxLen){
+                return false;
+            }
+            
+        }
+   
+      return false;   
+    }
+    
+    int wordBreak(string s, vector<string> &wordDict) {
+        int maxLen = 0;
+        
+        unordered_map<string,int>mp;
+        
+        for(int i = 0;i<wordDict.size();i++){
+            mp[wordDict[i]]++;
+            string s = wordDict[i];
+            int tempLen = s.size();
+            maxLen = max(maxLen,tempLen);
+        }
+        
+        return  solve(s,mp,maxLen);
+    }
+};
+
+// { Driver Code Starts.
+
+int main(){
+    int t;
+    cin>>t;
+    while(t--){
+        int n;
+        cin>>n;
+        vector<string> dict;
+        for(int i=0;i<n;i++){
+            string S;
+            cin>>S;
+            dict.push_back(S);
+        }
+        string line;
+        cin>>line;
+        Solution ob;
+        cout<<ob.wordBreak(line, dict)<<"\n";
+    }
+}
+  // } Driver Code Ends
