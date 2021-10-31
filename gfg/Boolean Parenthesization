@@ -1,0 +1,241 @@
+// Initial Template for C++
+
+#include <bits/stdc++.h>
+using namespace std;
+
+ // } Driver Code Ends
+// User function Template for C++
+
+class Solution{
+public:
+    int dp[201][201][2];
+    // int solve(string S , int i ,int j,int isTrue){
+        
+    //   if(i>j){
+    //       return 0;
+    //   }
+      
+    //   if(i==j){
+    //       if(isTrue){
+    //           return S[i] = 'T' ?1:0;
+    //       }
+    //       else{
+    //           return S[i] = 'F'?1:0;
+    //       }
+    //   }
+      
+      
+    //     if(dp[i][j][isTrue] != -1){
+    //         return dp[i][j][isTrue];
+    //     }
+        
+      
+      
+    //   int total = 0;
+      
+    //   for(int k = i+1;k<j;k+=2){
+    //         int leftTrue,leftFalse,rightTrue,rightFalse;
+    //         if(dp[i][k-1][1] != -1 ){
+    //             leftTrue =  dp[i][k-1][1];
+    //         }
+    //         else{
+    //              leftTrue= solve(S,i,k-1,1);
+    //         }
+    //         if(dp[i][k-1][0] != -1){
+    //             leftFalse = dp[i][k-1][0] ;
+    //         }
+    //         else{
+    //             leftFalse = solve(S,i,k-1,0); 
+    //         }
+            
+    //         if(dp[k+1][j][1] != -1){
+    //             rightTrue =  dp[k+1][j][1];
+    //         }
+    //         else{
+    //           rightTrue = solve(S,k+1,j,1); 
+    //         }
+    //         if(dp[k+1][j][0] != -1){
+    //             rightFalse =  dp[k+1][j][0];
+    //         }
+    //         else{
+    //             rightFalse = solve(S,k+1,j,0);
+    //         }
+          
+          
+    //         //   if(S[k] == '&'){
+    //         //       if(isTrue){
+    //         //         temp += leftTrue*rightTrue;  
+    //         //       }
+    //         //       else{
+    //         //         temp += leftFalse*rightTrue + leftTrue*rightFalse + leftFalse*rightFalse;  
+    //         //       }
+    //         //   }
+    //         //   else if(S[k] == '|'){
+    //         //       if(isTrue){
+    //         //           temp += leftFalse*rightTrue + leftTrue*rightFalse + leftTrue*rightTrue;
+    //         //       }
+    //         //       else{
+    //         //           temp += leftFalse*rightFalse;  
+    //         //       }
+    //         //   }
+    //         //   else if(S[k] == '^'){
+    //         //       if(isTrue){
+    //         //           temp +=  leftFalse*rightTrue + leftTrue*rightFalse;
+    //         //       }
+    //         //       else{
+    //         //           temp += leftFalse*rightFalse + leftTrue*rightTrue;
+    //         //       }
+    //         //   }
+              
+    //       if(S[k] == '&'){
+    //           if(isTrue == 1){
+    //             total += leftTrue*rightTrue;  
+    //           }    
+    //           else{
+    //              total += leftFalse*rightFalse + leftFalse*rightTrue + leftTrue*rightFalse; 
+    //           }    
+    //         }
+    //         if(S[k] == '|'){
+    //             if(isTrue == 1){
+    //               total +=leftTrue*rightFalse + leftFalse*rightTrue+leftTrue*rightTrue; 
+    //             }
+    //             else{
+    //                 total += leftFalse*rightFalse;
+    //             }
+    //         }
+    //         if(S[k] == '^'){
+    //             if(isTrue == 1){
+    //               total += leftTrue*rightFalse + leftFalse*rightTrue; 
+    //             }
+    //             else{
+    //                 total += leftTrue*rightTrue + leftFalse*rightFalse;
+    //             }
+                
+    //         }
+            
+          
+    //       dp[i][j][isTrue] = total%1003; 
+          
+    //   }
+          
+    //   return total%1003;  
+    // }
+    
+
+    
+    
+    
+    // int dp[201][201][2];
+    
+    int solve(string S,int i ,int j,int isTrue){
+        if(i>j){
+            return 0;
+        }
+        if(i == j){
+            if(isTrue == 1){
+                return S[i] == 'T'?1:0;
+            }
+            else{
+              return S[i] == 'F'?1:0;   
+            }
+        }
+        
+        if(dp[i][j][isTrue] != -1){
+            return dp[i][j][isTrue];
+        }
+        
+        int total = 0 ;
+        for(int k = i+1;k<j;k=k+2){
+            
+            int leftTrue,leftFalse,rightTrue,rightFalse;
+            if(dp[i][k-1][1] != -1 ){
+                leftTrue =  dp[i][k-1][1];
+            }
+            else{
+                 leftTrue= solve(S,i,k-1,1);
+            }
+            if(dp[i][k-1][0] != -1){
+                leftFalse = dp[i][k-1][0] ;
+            }
+            else{
+                leftFalse = solve(S,i,k-1,0); 
+            }
+            
+            if(dp[k+1][j][1] != -1){
+                rightTrue =  dp[k+1][j][1];
+            }
+            else{
+              rightTrue = solve(S,k+1,j,1); 
+            }
+            if(dp[k+1][j][0] != -1){
+                rightFalse =  dp[k+1][j][0];
+            }
+            else{
+                rightFalse = solve(S,k+1,j,0);
+            }
+            
+            
+            if(S[k] == '&'){
+              if(isTrue == 1){
+                total += leftTrue*rightTrue;  
+              }    
+              else{
+                 total += leftFalse*rightFalse + leftFalse*rightTrue + leftTrue*rightFalse; 
+              }    
+            }
+            if(S[k] == '|'){
+                if(isTrue == 1){
+                  total +=leftTrue*rightFalse + leftFalse*rightTrue+leftTrue*rightTrue; 
+                }
+                else{
+                    total += leftFalse*rightFalse;
+                }
+            }
+            if(S[k] == '^'){
+                if(isTrue == 1){
+                  total += leftTrue*rightFalse + leftFalse*rightTrue; 
+                }
+                else{
+                    total += leftTrue*rightTrue + leftFalse*rightFalse;
+                }
+                
+            }
+            
+          dp[i][j][isTrue] = total%1003; 
+        }
+     
+     return  total%1003;   
+    }
+    
+    
+    int countWays(int N, string S){
+        int i = 0;
+        int j = N-1;
+        memset(dp,-1,sizeof(dp));
+        return solve(S,i,j,true);
+    }
+    
+    //   int i = 0;
+    //   int j = N-1;
+    //   memset(dp,-1,sizeof(dp));
+    //   return solve(S,i,j,true);
+
+
+};
+
+// { Driver Code Starts.
+
+int main(){
+    int t;
+    cin>>t;
+    while(t--){
+        int N;
+        cin>>N;
+        string S;
+        cin>>S;
+        
+        Solution ob;
+        cout<<ob.countWays(N, S)<<"\n";
+    }
+    return 0;
+}  // } Driver Code Ends
